@@ -15,7 +15,7 @@ class MinStack {
         else if(x>=min){
             st.push(x);
         }
-        else if(x<min){
+        else{    // x<min
             st.push(2*x-min);
             min = x;
         }
@@ -26,7 +26,7 @@ class MinStack {
         else if(st.peek()>=min){
             st.pop();
         }
-        else if(st.peek()<min){      // fake value
+        else {        //st.peek()<min
             long old = 2*min - st.peek();
             min = old;
             st.pop();
