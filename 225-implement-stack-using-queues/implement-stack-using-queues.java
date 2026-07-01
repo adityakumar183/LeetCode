@@ -4,7 +4,8 @@ class MyStack {
     public MyStack() {
         // constructor
     }
-     
+
+    // push efficient method:-
     public void push(int val) {
         q.add(val);
     }
@@ -31,6 +32,31 @@ class MyStack {
         if(q.size()==0) return true;
         else return false;
     }
+
+    // // POP efficient method:-
+    // public void push(int val) {
+    //     if(q.size()==0) q.add(val);
+    //     else{
+    //         q.add(val);
+    //         for(int i=1;i<=q.size()-1;i++){
+    //             q.add(q.remove());
+    //         }
+    //     }
+    // }
+    
+    // public int pop() {
+    //     return q.remove();
+    // }
+    
+    // public int top() {
+    //     return q.peek();
+    // }
+    
+    // public boolean empty() {
+    //     if(q.size()==0) return true;
+    //     else return false;
+    // }
+    
 }
 
 /**
