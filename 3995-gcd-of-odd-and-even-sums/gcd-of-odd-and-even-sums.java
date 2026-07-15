@@ -1,5 +1,13 @@
 class Solution {
     public int gcdOfOddEvenSums(int n) {
-        return n;
+        int sumOdd = n*n;
+        int sumEven = n*n+n;
+
+        while(sumEven != 0){
+            int rem = sumOdd % sumEven;
+            sumOdd = sumEven;
+            sumEven = rem;
+        }
+        return sumOdd;
     }
 }
