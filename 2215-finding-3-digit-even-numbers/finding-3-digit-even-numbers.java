@@ -1,33 +1,43 @@
 class Solution {
-    public int[] findEvenNumbers(int[] digits) {
-        Map<Integer, Integer> freq = new HashMap<>();
-        for (int d : digits) {
-            freq.put(d, freq.getOrDefault(d, 0) + 1);
+    public int[] findEvenNumbers(int[] arr) {
+        Map<Integer,Integer> map = new HashMap<>();
+        for(int ele : arr){
+            if(map.containsKey(ele)){
+                int freq = map.get(ele);
+                map.put(ele, freq+1);
+            }
+            else map.put(ele, 1);
         }
 
-        Set<Integer> result = new HashSet<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        
+        for(int i = 100; i<= 999; i+=2){
+            int x = i;
+            int c = x % 10; x /= 10;
+            int b = x % 10; x /=10;
+            int a = x;
+            if(map.containsKey(a)){
+                int aFreq = map.get(a);
+                map.put(a,aFreq-1);
+                if(aFreq == 1) map.remove(a);
 
-        for (int num = 100; num <= 999; num++) {
-            if (num % 2 != 0) continue; 
+                    if(map.containsKey(b)){
+                        int bFreq = map.get(b);
+                        map.put(b,bFreq-1);
+                        if(bFreq == 1) map.remove(b);
 
-            int d1 = num / 100;
-            int d2 = (num / 10) % 10;
-            int d3 = num % 10;
-
-            Map<Integer, Integer> temp = new HashMap<>(freq);
-            if (temp.getOrDefault(d1, 0) > 0) {
-                temp.put(d1, temp.get(d1) - 1);
-                if (temp.getOrDefault(d2, 0) > 0) {
-                    temp.put(d2, temp.get(d2) - 1);
-                    if (temp.getOrDefault(d3, 0) > 0) {
-                        result.add(num);
+                            if(map.containsKey(c)){
+                                list.add(i);
+                            }
+                        map.put(b,bFreq);
                     }
-                }
+                map.put(a,aFreq);
             }
         }
-
-        List<Integer> list = new ArrayList<>(result);
-        Collections.sort(list);
-        return list.stream().mapToInt(x -> x).toArray();
+        int[] ans = new int[list.size()];
+        for(int i=0; i<ans.length;i++){
+            ans[i] = list.get(i);
+        }
+        return ans;
     }
 }
