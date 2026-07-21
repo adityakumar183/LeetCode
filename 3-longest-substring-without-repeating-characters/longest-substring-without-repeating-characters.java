@@ -10,8 +10,7 @@ class Solution {
             if(map.containsKey(ch) && map.get(ch) >= i){
                 int len = j-i;
                 maxlen = Math.max(maxlen,len);
-                while(s.charAt(i) != ch) i++;
-                i++;
+                i = map.get(ch) + 1;
             }
             map.put(ch,j);
             j++;
