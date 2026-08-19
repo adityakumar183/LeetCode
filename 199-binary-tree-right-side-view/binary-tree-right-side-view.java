@@ -16,8 +16,8 @@
 class Solution {
     public void dfs(TreeNode root, int level,List<Integer> ans){
         if(root==null) return;
-        ans.set(level,root.val);
         dfs(root.left,level+1,ans);
+        ans.set(level,root.val);
         dfs(root.right,level+1,ans);
     }
 
