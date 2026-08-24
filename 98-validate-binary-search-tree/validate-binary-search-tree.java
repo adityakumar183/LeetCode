@@ -14,27 +14,18 @@
  * }
  */
 class Solution {
-    public long Max(TreeNode root) {
-        if (root == null) return Long.MIN_VALUE;
-        long max = root.val;
-        long leftmax = Max(root.left);
-        long rightmax = Max(root.right);
-
-        return Math.max(max,Math.max(leftmax,rightmax));
+    public void inorder(TreeNode root, List<Integer> arr){
+        if(root==null) return;
+        inorder(root.left,arr);
+        arr.add(root.val);
+        inorder(root.right,arr);
     }
-
-    public long Min(TreeNode root) {
-        if (root == null) return Long.MAX_VALUE;
-        long min = root.val;
-        long leftmin = Min(root.left);
-        long rightmin = Min(root.right);
-
-        return Math.min(min,Math.min(leftmin,rightmin));
-    } 
     public boolean isValidBST(TreeNode root) {
-        if(root==null) return true;
-        if(root.val<=Max(root.left)) return false;
-        if(root.val>=Min(root.right)) return false;
-        return isValidBST(root.left) && isValidBST(root.right);
+        List<Integer> arr = new ArrayList<>();
+        inorder(root,arr);
+        for(int i = 1;i<arr.size();i++){
+            if(arr.get(i)<=arr.get(i-1)) return false;
+        }
+        return true;
     }
 }
